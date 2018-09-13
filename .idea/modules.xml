@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/grangular.iml" filepath="$PROJECT_DIR$/grangular.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/grangular_integrationTest.iml" filepath="$PROJECT_DIR$/.idea/modules/grangular_integrationTest.iml" group="grangular" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/grangular_main.iml" filepath="$PROJECT_DIR$/.idea/modules/grangular_main.iml" group="grangular" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/grangular_test.iml" filepath="$PROJECT_DIR$/.idea/modules/grangular_test.iml" group="grangular" />
+    </modules>
+  </component>
+</project>
