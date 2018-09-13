@@ -41,10 +41,10 @@ export class ListEmployeesComponent implements OnInit {
    * Get all employees
    */
   public getEmployees() {
-    this._employeeService.getEmployees().subscribe((data: Employee[]) => {
+    this._employeeService.getEmployees()
+      .subscribe((data: Employee[]) => {
       this.employees = data;
     });
-
   }
 
   /**
@@ -62,9 +62,10 @@ export class ListEmployeesComponent implements OnInit {
     this.displayDialog = false;
   }
 
-  public sortByNumber = (a: any) => {
+  /**
+   public sortByNumber = (a: any) => {
     return new Function('a', 'return +a.' + a + '.valueOf()');
-  }
+  } */
 
   /**
    * Show Add Dialog

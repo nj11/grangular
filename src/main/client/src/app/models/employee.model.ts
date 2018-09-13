@@ -5,4 +5,9 @@ export class Employee {
     gender: string;
     department: string;
     hireDate:Date;
+
+  constructor (e:Employee ){
+
+  }
+
 }

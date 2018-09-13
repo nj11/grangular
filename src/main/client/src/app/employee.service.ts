@@ -10,14 +10,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of, pipe} from "rxjs/index";
-import { map, catchError, tap } from 'rxjs/operators';
 import {Employee} from "./models/employee.model";
-
+import {map} from "rxjs/internal/operators";
 
 @Injectable()
 export class EmployeeService {
    API_URL = 'http://localhost:8080';
-
 
     constructor(private httpClient: HttpClient) { }
 
@@ -25,11 +23,29 @@ export class EmployeeService {
    * Get all employees
    * @returns {Observable<Object>}
    */
-  getEmployees() {
-        return this.httpClient.get(`${this.API_URL}/employee`);
+  getEmployees():Observable<any> {
+        //httpclient.get returns an observable<Response>.
+        //use map to return observable<Employee[]> response.
+        return this.httpClient.get(`${this.API_URL}/employee`).pipe(map(data => { return this.transformData(data)}));
     }
 
-  /**
+    transformData(data:any){
+      let dataTransform:Employee[]=[];
+      let i:number=0;
+      for (let item of data){
+        let employee = {} as Employee;
+        employee.hireDate = new Date(item.hireDate);
+        employee.id = item.id;
+        employee.name = item.name;
+        employee.city = item.city
+        employee.department = item.department;
+        employee.gender = item.gender;
+        dataTransform.push(employee)
+      }
+      return dataTransform;
+    }
+
+   /**
    * Get employee by ID
    * @param id
    * @returns {Observable<any>}
