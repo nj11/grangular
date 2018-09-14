@@ -8,7 +8,8 @@
 //http://localhost:3000/employee GET
 
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
+
 import {Observable, of, pipe} from "rxjs/index";
 import {Employee} from "./models/employee.model";
 import {map} from "rxjs/internal/operators";
@@ -23,12 +24,27 @@ export class EmployeeService {
    * Get all employees
    * @returns {Observable<Object>}
    */
-  getEmployees():Observable<any> {
+    getEmployees():Observable<Employee[]> {
         //httpclient.get returns an observable<Response>.
         //use map to return observable<Employee[]> response.
-        return this.httpClient.get(`${this.API_URL}/employee`).pipe(map(data => { return this.transformData(data)}));
+        return this.httpClient.get<Employee[]>(`${this.API_URL}/employee`).pipe(map(data => { return this.transformData(data)}));
     }
 
+  /**
+   * Filtervalues
+   * @param searchValues
+   * @returns {Observable<any>}
+   */
+    filterEmployees(searchValues:any):Observable<any>{
+       const httpParams = new HttpParams().set('city', searchValues.city.trim()).set('name',searchValues.name.trim()).set('department',searchValues.dept.trim()).set('gender',searchValues.gender.trim());
+       return this.httpClient.get<Employee[]>(`${this.API_URL}/employee/employeesearch`,{params: httpParams}).pipe(map(data => { return this.transformData(data)}));
+    }
+
+  /**
+   * Transforn returned data.
+   * @param data
+   * @returns {Employee[]}
+   */
     transformData(data:any){
       let dataTransform:Employee[]=[];
       let i:number=0;

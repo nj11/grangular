@@ -13,6 +13,7 @@ export class ListEmployeesComponent implements OnInit {
   employees: Employee[] = [];
   selectedEmployees: Employee[];
   cols: any[];
+  searchText:String;
 
   selectedEmployee: Employee;
   displayDialog: boolean;

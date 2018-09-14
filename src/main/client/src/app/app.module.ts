@@ -9,11 +9,15 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
-
 //Employee Service.
 import { EmployeeService } from './employee.service';
 
+//forms
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+//browser page refresh.
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 //PrimenG
 import { DataTableModule } from 'primeng/primeng';
@@ -31,7 +35,8 @@ import {MenuItem} from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { ListEmployeesComponent } from './employees/list-employees.component';
-import { CreateEmployeeComponent } from './employees/create-employee.component';
+
+import { SearchEmployeesComponent } from './employees/search-employees/search-employees.component';
 
 
 // Each route maps a URL path to a component
@@ -42,7 +47,7 @@ import { CreateEmployeeComponent } from './employees/create-employee.component';
 // will set it to full as we want to do a full match
 const appRoutes: Routes = [
   { path: 'list', component: ListEmployeesComponent },
-  { path: 'create', component: CreateEmployeeComponent },
+  { path: 'search', component: SearchEmployeesComponent },
   { path: '', redirectTo: '/list', pathMatch: 'full' }
 ];
 
@@ -50,13 +55,13 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     ListEmployeesComponent,
-    CreateEmployeeComponent
+    SearchEmployeesComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes,{ useHash: true }),
     FormsModule,
     DataTableModule,
     AngularFontAwesomeModule,
@@ -71,7 +76,7 @@ const appRoutes: Routes = [
     PaginatorModule,
     CalendarModule
   ],
-  providers: [EmployeeService],
+  providers: [EmployeeService,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

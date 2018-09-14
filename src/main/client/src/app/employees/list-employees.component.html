@@ -36,16 +36,15 @@
 
 </table>
 -->
+<div class="text-sm-right">
+  <i class="fa fa-search" aria-hidden="true"></i>&nbsp;<input type="text" style="font-size:15px"  size="50" placeholder="Search Text goes here" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+</div>
 
-
-<p-table [columns]="cols" [value]="employees" selectionMode="single" [(selection)]="selectedEmployee" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" #dt exportFilename="employees"   [responsive]="true">
+<p-table [columns]="cols" [value]="employees" selectionMode="single" [(selection)]="selectedEmployee" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10" #dt exportFilename="employees"   [responsive]="true" >
 
   <ng-template pTemplate="caption">
     List of Employees
   </ng-template>
-
-
-
 
   <ng-template pTemplate="header" let-columns>
     <tr>
